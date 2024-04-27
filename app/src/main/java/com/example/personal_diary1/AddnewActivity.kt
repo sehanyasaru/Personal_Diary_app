@@ -5,11 +5,13 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -35,16 +37,30 @@ class AddnewActivity : AppCompatActivity(){
         val time=findViewById<TextView>(R.id.textView16)
         val text=findViewById<EditText>(R.id.textView11)
         val add=findViewById<Button>(R.id.button6)
-
+      val back=findViewById<ImageView>(R.id.imageView)
+//        val check=findViewById<Button>(R.id.button7)
+////        check.setOnClickListener {
+////            if (DB.deleteTable(username)) {
+////                Log.d("Encryption", "table removed successfully")
+////            } else {
+////                Log.d("Encryption", "table not exisit")
+////            }
+////        }
         date.setOnClickListener {
             openDatePicker(date)
         }
         time.setOnClickListener{
            openTimePicker(time)
         }
+        back.setOnClickListener {
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            startActivity(intent)
+        }
         add.setOnClickListener {
             message=text.text.toString()
-
+            text.setText("")
+            date.setText("")
+            time.setText("")
             if(selecteddate.isEmpty()||selectedtime.isEmpty()||message.isEmpty()){
                 Toast.makeText(
                     this@AddnewActivity,
@@ -64,7 +80,7 @@ class AddnewActivity : AppCompatActivity(){
                 else{
                     Toast.makeText(
                         this@AddnewActivity,
-                        "Can't create the table",
+                        "The table is already exist",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -91,6 +107,7 @@ class AddnewActivity : AppCompatActivity(){
 
 
 }
+    @SuppressLint("SuspiciousIndentation")
     private fun openDatePicker(date:TextView) {
 
         val datePickerDialog = DatePickerDialog(this, android.R.style.Theme_Dialog,

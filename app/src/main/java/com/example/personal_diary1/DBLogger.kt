@@ -22,6 +22,19 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DBNAME, null, 1) {
         MyDB.execSQL("DROP TABLE IF EXISTS users")
     }
 
+//    fun deleteTable(username: String): Boolean {
+//        val MyDB = writableDatabase
+//
+//        return try {
+//            MyDB.execSQL("DROP TABLE IF EXISTS $username")
+//            true // Table dropped successfully
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//            false // Error occurred while dropping the table
+//        }
+//    }
+
+
     fun insertData(username: String, password: String, index: String): Boolean {
         val MyDB = writableDatabase
         val contentValues = ContentValues()
@@ -35,11 +48,14 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DBNAME, null, 1) {
         val MyDB = writableDatabase
         val contentValues = ContentValues()
         contentValues.put("username",username)
+        contentValues.put("message",message)
         contentValues.put("Date",selecteddate)
         contentValues.put("Time",selectedtime)
         val result = MyDB.insert(username, null, contentValues)
         return result != -1L
     }
+    @SuppressLint("Range")
+
 
     fun checkUsername(username: String): Boolean {
         val MyDB = writableDatabase
@@ -50,7 +66,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DBNAME, null, 1) {
         val db = writableDatabase
         if (!isTableExists(db,username)) {
             // Table doesn't exist, create it
-            db.execSQL("CREATE TABLE $username (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, Date TEXT, Time TEXT)")
+            db.execSQL("CREATE TABLE $username (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT,message TEXT, Date TEXT, Time TEXT)")
             return true
         }
         return false  // Table already exists
