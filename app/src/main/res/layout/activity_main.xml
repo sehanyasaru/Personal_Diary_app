@@ -1,0 +1,90 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/whiteBox"
+        android:layout_width="wrap_content"
+        android:layout_height="449dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="50dp"
+        android:background="#80FFFFFF"
+        android:elevation="4dp"
+        android:padding="10dp">
+
+
+        <!-- TextView -->
+
+        <RelativeLayout
+            android:id="@+id/boxView"
+            android:layout_width="200dp"
+            android:layout_height="273dp"
+            android:layout_marginLeft="55dp"
+            android:background="@android:color/transparent"
+            android:backgroundTint="@android:color/black"
+            android:elevation="4dp"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/lockIcon"
+                android:layout_width="164dp"
+                android:layout_height="230dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/th" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/boxView2"
+            android:layout_width="350dp"
+            android:layout_height="120dp"
+            android:layout_below="@id/boxView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="48dp"
+            android:layout_marginTop="21dp"
+            android:background="@drawable/box_background"
+            android:elevation="4dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Hello! Amma"
+            android:textColor="@android:color/black"
+            android:textSize="30sp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/whiteBox"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:text="Add new" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/whiteBox"
+        android:layout_marginLeft="165dp"
+        android:layout_marginTop="5dp"
+        android:text="View" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/whiteBox"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="280dp"
+        android:text="Settings" />
+
+</RelativeLayout>
+
