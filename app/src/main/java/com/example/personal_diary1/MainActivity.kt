@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val button1=findViewById<Button>(R.id.button1)
         val button2=findViewById<Button>(R.id.button3)
-
+        val button3=findViewById<Button>(R.id.button2)
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         button1.setOnClickListener{
             val intent = Intent(applicationContext,AddnewActivity::class.java)
@@ -49,6 +49,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(applicationContext,SettingsActivity::class.java)
             startActivity(intent)
         }
+        button3.setOnClickListener {
+            val intent = Intent(applicationContext,ViewActivity::class.java)
+            startActivity(intent)
+        }
+
         imageView = findViewById(R.id.background)
 
 

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- EditText to display the message -->
+    <EditText
+        android:id="@+id/editTextMessage"
+        android:layout_width="312dp"
+        android:layout_height="80dp"
+
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/box_background"
+        android:gravity="center_vertical"
+        android:hint="You can update the message in here  ... "
+        android:paddingLeft="20dp"
+        android:textSize="20dp" />
+
+    <!-- EditText to display the ID -->
+    <TextView
+        android:id="@+id/editTextDate"
+        android:layout_width="312dp"
+        android:layout_height="80dp"
+
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/box_background"
+        android:gravity="center_vertical"
+        android:hint="Date  ... "
+        android:paddingLeft="20dp"
+        android:textSize="20dp" />
+    <TextView
+        android:id="@+id/editTexttime"
+        android:layout_width="312dp"
+        android:layout_height="80dp"
+
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/box_background"
+        android:gravity="center_vertical"
+        android:hint="Time  ... "
+        android:paddingLeft="20dp"
+        android:textSize="20dp" />
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="150dp"
+        android:text="Update"
+        android:id="@+id/update"/>
+
+
+
+</LinearLayout>

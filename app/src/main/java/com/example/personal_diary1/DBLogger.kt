@@ -3,10 +3,13 @@ package com.learnandroid.loginsqlite
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
+import android.content.SharedPreferences
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+// MessageModel.kt
+
 
 class DBHelper(context: Context) : SQLiteOpenHelper(context, DBNAME, null, 1) {
 
@@ -33,6 +36,151 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DBNAME, null, 1) {
 //            false // Error occurred while dropping the table
 //        }
 //    }
+
+
+    fun getUserMessages(username: String): List<String> {
+        val messages = mutableListOf<String>()
+        val db = writableDatabase
+
+        // Define the columns you want to retrieve
+        val projection = arrayOf("id","message", "Date", "Time")
+
+
+
+        // Sort the results by Date and Time in descending order
+        val sortOrder = "Date DESC, Time DESC"
+
+        // Query the database
+        val cursor = db.query(
+            username,       // The table name
+            projection,
+            null,// The columns to retrieve
+            null,// ,  // The values for the WHERE clause
+            null,           // Don't group the rows
+            null,           // Don't filter by row groups
+            sortOrder       // Sort the results
+        )
+
+        // Iterate through the cursor to retrieve the data
+        while (cursor.moveToNext()) {
+            val id = cursor.getString(cursor.getColumnIndexOrThrow("id"))
+
+            val message = cursor.getString(cursor.getColumnIndexOrThrow("message"))
+            val date = cursor.getString(cursor.getColumnIndexOrThrow("Date"))
+            val time = cursor.getString(cursor.getColumnIndexOrThrow("Time"))
+
+            // Format the retrieved data as needed
+            val formattedMessage = "Date: $date, Time: $time\n$message, Id: $id"
+            messages.add(formattedMessage)
+        }
+
+        // Close the cursor and database
+        cursor.close()
+        db.close()
+
+        return messages
+    }
+    fun getMessagesid(username: String): List<Int> {
+        val messageid = mutableListOf<Int>()
+        val db = writableDatabase
+
+        // Define the columns you want to retrieve
+        val projection = arrayOf("id")
+
+
+
+        // Sort the results by Date and Time in descending order
+        val sortOrder = "Date DESC, Time DESC"
+
+        // Query the database
+        val cursor = db.query(
+            username,       // The table name
+            projection,
+            null,// The columns to retrieve
+            null,// ,  // The values for the WHERE clause
+            null,           // Don't group the rows
+            null,           // Don't filter by row groups
+            sortOrder       // Sort the results
+        )
+
+        // Iterate through the cursor to retrieve the data
+        while (cursor.moveToNext()) {
+            val id = cursor.getString(cursor.getColumnIndexOrThrow("id"))
+            val idInt = id.toIntOrNull() // Use toIntOrNull() to handle potential null or non-integer values
+            idInt?.let {
+                messageid.add(idInt) // Add the parsed integer to the list if conversion is successful
+            }
+        }
+
+        // Close the cursor and database
+        cursor.close()
+        db.close()
+
+        return messageid
+    }
+    fun retrieveAndStoreMessageData(context: Context, selectedId: Int,username:String) {
+        val sharedPreferences: SharedPreferences = context.getSharedPreferences("MessageData", Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+
+        val db = writableDatabase
+
+        // Define the columns you want to retrieve
+        val projection = arrayOf("message", "Date", "Time")
+
+        // Filter the results by selected ID
+        val selection = "id = ?"
+        val selectionArgs = arrayOf(selectedId.toString())
+
+        // Query the database
+        val cursor = db.query(
+            username,
+            projection,
+            selection,
+            selectionArgs,
+            null,
+            null,
+            null
+        )
+
+        // Iterate through the cursor to retrieve the data
+        if (cursor.moveToFirst()) {
+            val message = cursor.getString(cursor.getColumnIndexOrThrow("message"))
+            val date = cursor.getString(cursor.getColumnIndexOrThrow("Date"))
+            val time = cursor.getString(cursor.getColumnIndexOrThrow("Time"))
+
+            // Store retrieved data in SharedPreferences
+            editor.putString("stored_message", message)
+            editor.putString("stored_date", date)
+            editor.putString("stored_time", time)
+            editor.apply()
+        }
+
+        // Close the cursor and database
+        cursor.close()
+        db.close()
+    }
+    fun updateUserData(username :String,selectedId: Int, message: String, selectedTime: String, selectedDate: String): Boolean {
+        val db = writableDatabase
+        val contentValues = ContentValues()
+
+        // Prepare the values to be updated
+        contentValues.put("message", message)
+        contentValues.put("time", selectedTime)
+        contentValues.put("date", selectedDate)
+
+        // Specify the WHERE clause to identify the specific record to update based on ID
+        val selection = "id = ?"
+        val selectionArgs = arrayOf(selectedId.toString())
+
+        // Perform the update operation
+        val rowsAffected = db.update(username, contentValues, selection, selectionArgs)
+
+        // Close the database connection
+        db.close()
+
+        // Check if the update was successful (rowsAffected > 0 means at least one row was updated)
+        return rowsAffected > 0
+    }
 
 
     fun insertData(username: String, password: String, index: String): Boolean {
@@ -108,7 +256,7 @@ fun getpassword(username:String): String? {
     @SuppressLint("Range")
     fun getindex(username:String): String? {
         val MyDB = writableDatabase
-        val cursor: Cursor = MyDB.rawQuery("SELECT indexnumber FROM users WHERE username = ? AND password = ?", arrayOf(username))
+        val cursor: Cursor = MyDB.rawQuery("SELECT indexnumber FROM users WHERE username = ? ", arrayOf(username))
         var key: String? = null
 
         if (cursor.moveToFirst()) {
