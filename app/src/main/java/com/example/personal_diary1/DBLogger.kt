@@ -7,7 +7,8 @@ import android.content.SharedPreferences
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
+import androidx.appcompat.app.AlertDialog
+
 // MessageModel.kt
 
 
@@ -61,7 +62,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DBNAME, null, 1) {
             sortOrder       // Sort the results
         )
 
-        // Iterate through the cursor to retrieve the data
+
         while (cursor.moveToNext()) {
             val id = cursor.getString(cursor.getColumnIndexOrThrow("id"))
 
@@ -69,8 +70,9 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DBNAME, null, 1) {
             val date = cursor.getString(cursor.getColumnIndexOrThrow("Date"))
             val time = cursor.getString(cursor.getColumnIndexOrThrow("Time"))
 
-            // Format the retrieved data as needed
-            val formattedMessage = "Date: $date, Time: $time\n$message, Id: $id"
+
+            val formattedMessage = "$date$time\n$message"
+
             messages.add(formattedMessage)
         }
 

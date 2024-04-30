@@ -1,5 +1,4 @@
 package com.example.personal_diary1
-
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -8,7 +7,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -19,7 +17,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.learnandroid.loginsqlite.DBHelper
 class ViewActivity : AppCompatActivity() {
-
     private lateinit var listView: ListView
     private var selectedtime=""
     private var selecteddate=""
@@ -31,30 +28,22 @@ class ViewActivity : AppCompatActivity() {
         setContentView(R.layout.viewactivity)
 
         val DB = DBHelper(this)
-        listView = findViewById(R.id.listview)
         val back=findViewById<ImageView>(R.id.back)
         back.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
         }
-
-        // Retrieve messages for a specific user (change 'sehan' to your desired username)
         val username = "sehan"
         val userMessages = DB.getUserMessages(username)
         val messageid=DB.getMessagesid(username)
 
-        // Create an ArrayAdapter to populate the ListView with messages
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, userMessages)
 
-        // Set the adapter for the ListView
+        listView = findViewById(R.id.listview)
+        val adapter = CustomAdapter(this,R.layout.list_itm,userMessages)
         listView.adapter = adapter
         listView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-            val selectedId = messageid[position] // Get the selected ID from the list
-
-            // Retrieve and store message, date, and time based on the selected ID
+            val selectedId = messageid[position]
             DB.retrieveAndStoreMessageData(this ,selectedId,username)
-
-            // Retrieve stored message, date, and time values separately from SharedPreferences
             val sharedPreferences: SharedPreferences = getSharedPreferences("MessageData", Context.MODE_PRIVATE)
             val storedMessage = sharedPreferences.getString("stored_message", "")
             val storedDate = sharedPreferences.getString("stored_date", "")
@@ -62,10 +51,8 @@ class ViewActivity : AppCompatActivity() {
 
 
 
-            // Inflate custom layout for AlertDialog
-            val dialogView = layoutInflater.inflate(R.layout.dialog_custom_layout, null)
 
-            // Find EditText widgets in the custom layout
+            val dialogView = layoutInflater.inflate(R.layout.dialog_custom_layout, null)
             val editMessage = dialogView.findViewById<EditText>(R.id.editTextMessage)
             val editTime = dialogView.findViewById<TextView>(R.id.editTexttime)
             val editDate=dialogView.findViewById<TextView>(R.id.editTextDate)
@@ -103,14 +90,10 @@ class ViewActivity : AppCompatActivity() {
                     }
                 }
         }
-
-
-            // Set text for EditText widgets
             editMessage.setText( storedMessage)
             editTime.setText( storedTime)
             editDate.setText(storedDate )
 
-            // Build and show an AlertDialog with custom layout
             val alertDialogBuilder = AlertDialog.Builder(this)
             alertDialogBuilder.apply {
                 setTitle("Message Details")
@@ -121,14 +104,14 @@ class ViewActivity : AppCompatActivity() {
                 }
             }
 
-            // Create and show the AlertDialog
+
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
         }
 
     }
     private fun updatelist(messagesid: List<String>){
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, messagesid)
+        val adapter = CustomAdapter(this, R.layout.list_itm, messagesid)
 
         // Set the adapter for the ListView
         listView.adapter = adapter
