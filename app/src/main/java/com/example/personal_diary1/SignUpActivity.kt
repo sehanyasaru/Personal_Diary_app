@@ -25,7 +25,6 @@ class SignUpActivity : AppCompatActivity(){
         val usernameTextView = findViewById<EditText>(R.id.textView)
         val passwordTextView = findViewById<EditText>(R.id.textView3)
         val reppasswordTextView = findViewById<EditText>(R.id.textView5)
-        val indexTextView = findViewById<EditText>(R.id.textView6)
         val button=findViewById<Button>(R.id.button)
         val button2=findViewById<Button>(R.id.button2)
 
@@ -35,17 +34,14 @@ class SignUpActivity : AppCompatActivity(){
             val username1 = usernameTextView.text.toString()
             val password = passwordTextView.text.toString()
             val reppassword = reppasswordTextView.text.toString()
-            val index = indexTextView.text.toString()
-
-
-            if (username1.isEmpty() || password.isEmpty() || index.isEmpty()|| reppassword.isEmpty()) {
+ if (username1.isEmpty() || password.isEmpty()|| reppassword.isEmpty()) {
                 Toast.makeText(this@SignUpActivity, "Please enter all the fields", Toast.LENGTH_SHORT).show()
             } else {
                 if (password ==  reppassword) {
                     val encryptedPassword = encryptPassword(username1,password,aesKey)
                     val checkUser = DB.checkUsername(username1)
                     if (!checkUser) {
-                        val insert = DB.insertData( username1, encryptedPassword ,index)
+                        val insert = DB.insertData( username1, encryptedPassword)
 
                         if (insert) {
                             Toast.makeText(this@SignUpActivity, "Registered successfully", Toast.LENGTH_SHORT).show()
@@ -67,13 +63,7 @@ class SignUpActivity : AppCompatActivity(){
             startActivity(intent)
         }
   }
-    private fun generateAESKey(): SecretKey {
-        val keyGenerator = KeyGenerator.getInstance("AES")
-        keyGenerator.init(256)
 
-
-        return keyGenerator.generateKey()
-    }
 
     private fun encryptPassword(username:String,password: String, aesKey: SecretKey): String {
         val cipher = Cipher.getInstance("AES/ECB/PKCS5Padding")

@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         val button1=findViewById<Button>(R.id.button1)
         val button2=findViewById<Button>(R.id.button3)
         val button3=findViewById<Button>(R.id.button2)
-        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences("MyPrefs2", Context.MODE_PRIVATE)
         button1.setOnClickListener{
             val intent = Intent(applicationContext,AddnewActivity::class.java)
             startActivity(intent)
@@ -62,10 +62,10 @@ class MainActivity : AppCompatActivity() {
         val username = sharedPreferences.getString("username", null)
         val textViewWelcomeMessage = findViewById<TextView>(R.id.boxView2)
         if(username!=null){
-            textViewWelcomeMessage.setText( "Welcome, $username!")
+            textViewWelcomeMessage.setText( "Welcome, $username !")
         }
         else{
-            textViewWelcomeMessage.setText( "Welcome, yasaru!")
+            textViewWelcomeMessage.setText( "Welcome, yasaru !")
         }
 
         updateBackgroundPeriodically()

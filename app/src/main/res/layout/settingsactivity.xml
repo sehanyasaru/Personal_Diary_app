@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/leaves"
     android:layout_height="match_parent">
 
     <Button
@@ -10,10 +11,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textView8"
-        android:layout_marginLeft="160dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-medium"
         android:gravity="center"
+        android:backgroundTint="#19184B"
+        android:fontFamily="@font/rgular"
+        android:textColor="@android:color/white"
         android:text="Set"
 
         />
@@ -22,41 +25,61 @@
         android:id="@+id/textView8"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_below="@id/appIcon"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="41dp"
+        android:layout_below="@id/lockIcon"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="100dp"
         android:background="@drawable/box_background"
         android:gravity="center_vertical"
+        android:textColor="#19184B"
+        android:textColorHint="#A9A9A9"
         android:hint="Give your name here "
         android:paddingLeft="20dp"
         android:textSize="20dp" />
 
     <ImageView
-        android:id="@+id/appIcon"
-        android:layout_width="164dp"
-        android:layout_height="230dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="60dp"
-        android:src="@drawable/th" />
+        android:id="@+id/back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@mipmap/back" />
+    <TextView
+        android:id="@+id/topic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="20dp"
+        android:textColor="#19184B"
+        android:text="Hello Fellows"
+        android:fontFamily="@font/rgular"
+        android:gravity="center"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"/>
+
+    <ImageView
+        android:id="@+id/lockIcon"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/topic"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+
+        android:src="@drawable/smartphone_1108389" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/rgular"
+        android:textColor="#19184B"
         android:text="This App was developed by Your_Name (Student_ID)"
         android:layout_below="@id/button5"
-        android:layout_marginLeft="40dp"
-         android:layout_marginTop="200dp"
+        android:layout_marginTop="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         android:gravity="center_vertical"/>
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="35dp"
-        android:layout_height="45dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
 
-        app:srcCompat="@drawable/backarrow" />
 
 </RelativeLayout>

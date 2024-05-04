@@ -26,11 +26,16 @@ class LoginActivity: AppCompatActivity(){
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.loginactivity)
-        sharedPreferences = getSharedPreferences("MyPrefs2", Context.MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val button = findViewById<Button>(R.id.button4)
+        val button2 = findViewById<Button>(R.id.button2)
         val username = findViewById<EditText>(R.id.textView4)
         val password = findViewById<EditText>(R.id.textView7)
         val DB = DBHelper(this)
+        button2.setOnClickListener {
+            val intent = Intent(applicationContext, SignUpActivity::class.java)
+            startActivity(intent)
+        }
         button.setOnClickListener {
             val username = username.text.toString()
             val password = password.text.toString()

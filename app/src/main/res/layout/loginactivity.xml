@@ -1,31 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/leaves"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <TextView
+        android:id="@+id/topic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="#19184B"
+        android:text="Hello Fellows"
+        android:fontFamily="@font/rgular"
+        android:gravity="center"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"/>
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textView7"
-        android:layout_marginLeft="150dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
-        android:fontFamily="sans-serif-medium"
         android:gravity="center"
+        android:fontFamily="@font/rgular"
+        android:backgroundTint="#19184B"
+        android:textColor="@color/white"
 
         android:text="Login" />
 
     <EditText
         android:id="@+id/textView7"
         android:layout_width="250dp"
+        android:textColor="#19184B"
+        android:textColorHint="#A9A9A9"
         android:layout_height="50dp"
         android:layout_below="@id/textView4"
-        android:layout_marginLeft="60dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:background="@drawable/box_background"
-        android:fontFamily="sans-serif-medium"
         android:gravity="center_vertical"
+        android:inputType="textPassword"
         android:hint="Password"
         android:paddingLeft="20dp"
         android:textSize="20dp" />
@@ -33,9 +50,11 @@
     <EditText
         android:id="@+id/textView4"
         android:layout_width="250dp"
+        android:textColor="#19184B"
+        android:textColorHint="#A9A9A9"
         android:layout_height="50dp"
         android:layout_below="@id/appIcon"
-        android:layout_marginLeft="60dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="34dp"
         android:background="@drawable/box_background"
         android:gravity="center_vertical"
@@ -45,10 +64,36 @@
 
     <ImageView
         android:id="@+id/appIcon"
-        android:layout_marginLeft="110dp"
-        android:layout_width="164dp"
-        android:layout_height="230dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="62dp"
-        android:src="@drawable/th" />
+        android:layout_marginTop="80dp"
+        android:src="@drawable/smartphone_1108389" />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/rgular"
+        android:text="I don't have an account "
+        android:textSize="18dp"
+        android:textColor="#19184B"
+        android:layout_below="@id/button4"
+        />
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button4"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="#19184B"
+        android:fontFamily="@font/rgular"
+        android:gravity="center"
+        android:text="SignUp"
+        android:textColor="@color/white" />
+
 </RelativeLayout>

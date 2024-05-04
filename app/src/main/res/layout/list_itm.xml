@@ -3,15 +3,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center"
     android:padding="10dp"
+    android:orientation="horizontal"
     android:background="@drawable/list_item_background">
+    <ImageView
+        android:id="@+id/imagedb"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
 
+
+        />
     <TextView
         android:id="@+id/textViewListItem"
-        android:paddingLeft="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:textColor="@android:color/black" />
+        android:layout_marginStart="10dp"
+        android:textColor="#19184B"/>
 
 </LinearLayout>

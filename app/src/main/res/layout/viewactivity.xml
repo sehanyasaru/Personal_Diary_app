@@ -1,26 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/leaves"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:contextClickable="true"
     >
     <ImageView
         android:id="@+id/back"
-        android:layout_width="35dp"
-        android:layout_height="45dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
+        app:srcCompat="@mipmap/back" />
+    <TextView
+        android:id="@+id/topic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="20dp"
+        android:textColor="#19184B"
+        android:text="Hello Fellows"
+        android:fontFamily="@font/rgular"
+        android:gravity="center"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        android:layout_marginTop="30dp"/>
 
-        app:srcCompat="@drawable/backarrow" />
+    <ImageView
+        android:id="@+id/lockIcon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/topic"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
 
+        android:src="@drawable/smartphone_1108389" />
     <ListView
         android:id="@+id/listview"
         style="@android:style/Widget.DeviceDefault.ListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="80dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lockIcon"
+        android:layout_marginTop="20dp"
+        android:textColor="#19184B"
         android:divider="@android:color/transparent"
         android:dividerHeight="10.0sp"
         android:entries="@android:array/emailAddressTypes"

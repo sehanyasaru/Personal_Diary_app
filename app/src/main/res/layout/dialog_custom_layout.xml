@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical"
     android:padding="16dp">
 
     <!-- EditText to display the message -->
     <EditText
         android:id="@+id/editTextMessage"
-        android:layout_width="312dp"
-        android:layout_height="80dp"
-
-        android:layout_marginLeft="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="@drawable/box_background"
-        android:gravity="center_vertical"
+        android:gravity="center"
+        android:textColor="#19184B"
         android:hint="You can update the message in here  ... "
-        android:paddingLeft="20dp"
         android:textSize="20dp" />
 
     <!-- EditText to display the ID -->
     <TextView
         android:id="@+id/editTextDate"
-        android:layout_width="312dp"
-        android:layout_height="80dp"
-
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/editTextMessage"
+        android:textColor="#19184B"
         android:background="@drawable/box_background"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:hint="Date  ... "
-        android:paddingLeft="20dp"
         android:textSize="20dp" />
     <TextView
         android:id="@+id/editTexttime"
-        android:layout_width="312dp"
-        android:layout_height="80dp"
-
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextDate"
+        android:layout_centerHorizontal="true"
+        android:textColor="#19184B"
+        android:layout_marginTop="50dp"
         android:background="@drawable/box_background"
         android:gravity="center_vertical"
         android:hint="Time  ... "
@@ -46,12 +47,17 @@
         android:textSize="20dp" />
     <Button
         android:layout_width="100dp"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:layout_marginLeft="150dp"
+        android:layout_below="@+id/editTexttime"
+        android:backgroundTint="#19184B"
+        android:fontFamily="@font/rgular"
+        android:textColor="@android:color/white"
+        android:layout_centerHorizontal="true"
         android:text="Update"
         android:id="@+id/update"/>
 
 
 
-</LinearLayout>
+</RelativeLayout>

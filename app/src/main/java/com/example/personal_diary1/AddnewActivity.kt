@@ -50,15 +50,15 @@ class AddnewActivity : AppCompatActivity(){
         timeTextView=findViewById(R.id.textView16)
         val text=findViewById<EditText>(R.id.textView11)
         val add=findViewById<Button>(R.id.button6)
-      val back=findViewById<ImageView>(R.id.imageView)
-         image=findViewById(R.id.image1)
+        val back=findViewById<ImageView>(R.id.imageView)
+        image=findViewById(R.id.image1)
         startDateTimeUpdates()
         image.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
             startActivityForResult(intent, PICK_IMAGE_REQUEST)
         }
-  back.setOnClickListener {
+        back.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
         }
@@ -73,7 +73,7 @@ class AddnewActivity : AppCompatActivity(){
                 ).show()
             }
             else{
-              //  Log.d("Encryption", "Your message is: $message your date is : $selecteddate your time is :$selectedtime")
+                //  Log.d("Encryption", "Your message is: $message your date is : $selecteddate your time is :$selectedtime")
                 if(DB.createUserDataTable(username)==true){
                     Toast.makeText(
                         this@AddnewActivity,
@@ -88,9 +88,39 @@ class AddnewActivity : AppCompatActivity(){
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                Log.d("image encodings", "Encoded image: $base64String")
+                if(DB.userimage("image$username")==true){
+                    Toast.makeText(
+                        this@AddnewActivity,
+                        "Created the table image$username successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else{
+                    Toast.makeText(
+                        this@AddnewActivity,
+                        "The table is already exist",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+              //  Log.d("image encodings", "Encoded image: $base64String")
                 val insert= DB.insertDatatouser(username,message,getCurrentTime("HH:mm"),getCurrentDate("yyyy.MM.dd"))
                 if(insert){
+                    Toast.makeText(
+                        this@AddnewActivity,
+                        "Values are inserted successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else{
+                    Toast.makeText(
+                        this@AddnewActivity,
+                        "Values are not inserted",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                val insert1= DB.insertimage("image$username",base64String)
+                if(insert1){
                     Toast.makeText(
                         this@AddnewActivity,
                         "Values are inserted successfully",
@@ -111,24 +141,24 @@ class AddnewActivity : AppCompatActivity(){
 
 
 
-}
+    }
 
-override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    super.onActivityResult(requestCode, resultCode, data)
-    Log.d("onActivityResult", "requestCode: $requestCode, resultCode: $resultCode")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.d("onActivityResult", "requestCode: $requestCode, resultCode: $resultCode")
 
-    if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
-        data?.data?.let { uri ->
-            image.setImageURI(uri)
-            val bitmap: Bitmap? = uriToBitmap(uri)
-            bitmap?.let { bitmap ->
-             base64String = bitmapToBase64(bitmap)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+            data?.data?.let { uri ->
+                image.setImageURI(uri)
+                val bitmap: Bitmap? = uriToBitmap(uri)
+                bitmap?.let { bitmap ->
+                    base64String = bitmapToBase64(bitmap)
 
 
+                }
             }
         }
     }
-}
 
     private fun uriToBitmap(uri: Uri): Bitmap? {
         return try {

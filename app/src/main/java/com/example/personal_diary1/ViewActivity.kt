@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.AdapterView
 import android.widget.Button
 import android.widget.EditText
@@ -21,25 +22,29 @@ class ViewActivity : AppCompatActivity() {
     private var selectedtime=""
     private var selecteddate=""
     private var message=""
-
+    private lateinit var sharedPreferences: SharedPreferences
+private lateinit var DB:DBHelper
+private lateinit var encodedImages:List<String>
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.viewactivity)
 
-        val DB = DBHelper(this)
+        DB = DBHelper(this)
         val back=findViewById<ImageView>(R.id.back)
         back.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
         }
-        val username = "sehan"
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val username = sharedPreferences.getString("username", "") ?: ""
+        Log.d("username","$username")
         val userMessages = DB.getUserMessages(username)
+        Log.d("Messages", userMessages.size.toString())
         val messageid=DB.getMessagesid(username)
-
-
-        listView = findViewById(R.id.listview)
-        val adapter = CustomAdapter(this,R.layout.list_itm,userMessages)
+         encodedImages = DB.getUserImages("image$username")
+       listView = findViewById(R.id.listview)
+        val adapter = CustomAdapter(this,R.layout.list_itm,userMessages,encodedImages)
         listView.adapter = adapter
         listView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val selectedId = messageid[position]
@@ -48,6 +53,7 @@ class ViewActivity : AppCompatActivity() {
             val storedMessage = sharedPreferences.getString("stored_message", "")
             val storedDate = sharedPreferences.getString("stored_date", "")
             val storedTime = sharedPreferences.getString("stored_time", "")
+
 
 
 
@@ -97,10 +103,10 @@ class ViewActivity : AppCompatActivity() {
             val alertDialogBuilder = AlertDialog.Builder(this)
             alertDialogBuilder.apply {
                 setTitle("Message Details")
-                setView(dialogView) // Set custom layout to AlertDialog
+                setView(dialogView)
                 setPositiveButton("OK") { dialog, which ->
                     updatelist(DB.getUserMessages(username))
-                    dialog.dismiss() // Dismiss the dialog
+                    dialog.dismiss()
                 }
             }
 
@@ -110,10 +116,11 @@ class ViewActivity : AppCompatActivity() {
         }
 
     }
-    private fun updatelist(messagesid: List<String>){
-        val adapter = CustomAdapter(this, R.layout.list_itm, messagesid)
 
-        // Set the adapter for the ListView
+
+
+    private fun updatelist(messagesid: List<String>){
+        val adapter = CustomAdapter(this, R.layout.list_itm, messagesid, encodedImages)
         listView.adapter = adapter
 
     }

@@ -25,34 +25,18 @@ class SettingsActivity : AppCompatActivity() {
         val button = findViewById<Button>(R.id.button5)
         val username=findViewById<EditText>(R.id.textView8)
         val textViewWelcomeMessage = findViewById<TextView>(R.id.textView9)
-        val back= findViewById<ImageView>(R.id.imageView2)
-        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val back= findViewById<ImageView>(R.id.back)
         sharedPreferences1 = getSharedPreferences("MyPrefs2", Context.MODE_PRIVATE)
         var DB=DBHelper(this)
-        username1 = sharedPreferences.getString("username", "") ?: ""
+        username1 = sharedPreferences1.getString("username", "") ?: ""
+        textViewWelcomeMessage.text = "This App was developed by Sehan Yasaru"
 
-        // Retrieve stored id from SharedPreferences
-        var id = sharedPreferences1.getString("username", "") ?: ""
-        var index=DB.getindex(id)
-        // Update the welcome message based on the retrieved username and id
-        if (username1.isNotEmpty()) {
-            textViewWelcomeMessage.text = "This App was developed by $username1 ($index)"
-        } else {
-            textViewWelcomeMessage.text = "This App was developed by Your_Name (Student_ID)"
-        }
 
         button.setOnClickListener {
             // Update the username when the button is clicked
             username1 = username.text.toString()
             username.setText("")
-            sharedPreferences.edit().putString("username", username1).apply()
-
-            // Update the welcome message after updating the username
-            if (username1.isNotEmpty()) {
-                textViewWelcomeMessage.text = "This App was developed by $username1 ($index)"
-            } else {
-                textViewWelcomeMessage.text = "This App was developed by Your_Name (Student_ID)"
-            }
+            sharedPreferences1.edit().putString("username", username1).apply()
         }
 
         back.setOnClickListener {
